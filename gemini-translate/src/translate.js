@@ -16,21 +16,22 @@ function xorDecrypt(encoded, key) {
 
 //FREE GEMINI API KEY so i don't upset if they in internet :))
 //Tui không muốn lộ quá thô thôi :)) chứ biết up lên là lộ rồi
-const API_ENCRYPTEDS = [
-  "LDAJBDALJw4vNEAcJCU3NkA3QBI8AxwmWBgiIgsmDDlbTV4jTjws",
-  "LDAJBDALIT9VEhBWLigjQgQYBCNQNx1HARMAFS0ESDxZFBkBVhQG",
-  "LDAJBDALJkU8ODchE0ouRCI1RzcsHSgEWy9DNwwDUQYyPiNRUEUC",
-  "LDAJBDALJjYOGEsJAh0sTVxOMVMLNwk9CCY7LQg4EzkUEgsHEDYw",
+const APIKEYS = [
+  "REDACTED_GOOGLE_API_KEY",
+  "REDACTED_GOOGLE_API_KEY",
+  "REDACTED_GOOGLE_API_KEY",
+  "REDACTED_GOOGLE_API_KEY",
 ];
 
 function getNextApiKey() {
-  const key = xorDecrypt(API_ENCRYPTEDS[keyIndex]);
-  keyIndex = (keyIndex + 1) % API_ENCRYPTEDS.length;
+  // const key = xorDecrypt(API_ENCRYPTEDS[keyIndex], secret);
+  const key = APIKEYS[keyIndex];
+  keyIndex = (keyIndex + 1) % APIKEYS.length;
   return key;
 }
 
 function execute(text, from, to, apiKey) {
-  return translateContent(text, from, to, 0, keyApi, getNextApiKey());
+  return translateContent(text, from, to, 0, getNextApiKey());
 }
 
 function translateContent(text, from, to, retryCount, keyApi) {
@@ -40,6 +41,24 @@ function translateContent(text, from, to, retryCount, keyApi) {
   let modelId = "gemini-2.0-flash";
   let generateContentApi = "generateContent";
   let requestBody = {
+    // safetySettings: [
+    //   {
+    //     category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+    //     threshold: HarmBlockThreshold.BLOCK_NONE,
+    //   },
+    //   {
+    //     category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+    //     threshold: HarmBlockThreshold.BLOCK_NONE,
+    //   },
+    //   {
+    //     category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+    //     threshold: HarmBlockThreshold.BLOCK_NONE,
+    //   },
+    //   {
+    //     category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+    //     threshold: HarmBlockThreshold.BLOCK_NONE,
+    //   },
+    // ],
     contents: [
       {
         role: "user",
@@ -63,7 +82,7 @@ function translateContent(text, from, to, retryCount, keyApi) {
   Bổ sung chủ ngữ nếu câu gốc thiếu để rõ nghĩa, nhưng không làm mất nhịp điệu.
   Đại từ xưng hô:
   Sử dụng linh hoạt, hợp ngữ cảnh: "lão giả" thành "lão", "hắn" thành "gã", "y" tùy tình huống thành "hắn" hoặc "kẻ ấy".
-  Giữ phong cách xưng hô cổ đại Trung Quốc: "ta", "ngươi", "nàng", "tiểu thư", "tiên sinh", "gia gia", "tỷ tỷ", "lão sư". Không dùng "mày", "tao", "bạn".
+  Hãy giữ phong cách xưng hô cổ đại Trung Quốc: "ta", "ngươi", "nàng", "tiểu thư", "tiên sinh", "gia gia", "tỷ tỷ", "lão sư". Cấm tuyệt đối dùng "mày", "tao", "bạn", "tôi", "cậu", "tớ", chỉ được phép xưng "ta", "ngươi".
   Danh từ riêng và thuật ngữ:
   Giữ nguyên tên riêng, địa danh, chiêu thức, điển tích ở dạng Hán Việt, phiên âm chuẩn (ví dụ: Giang Văn Khang, Thần Trúc Hải, Thiên Uyên, "thiên mệnh chi tử").
   Không dịch nghĩa hoặc viết hoa các thuật ngữ đặc thù (ví dụ: "văn phòng tứ bảo", "thần quang phổ chiếu").
