@@ -1,13 +1,14 @@
 {
   "metadata": {
-    "name": "Gemini translate",
-    "author": "Phong",
+    "name": "Edge Translate",
+    "author": "vBook",
     "version": 1,
-    "source": "https://aistudio.google.com/",
-    "description": "Dịch truyện bằng Gemini",
+    "source": "https://generativelanguage.googleapis.com",
+    "description": "Dịch truyện bằng Gemini Translate",
     "type": "translate"
   },
   "script": {
+    "language": "language.js",
     "translate": "translate.js"
   },
   "config": {

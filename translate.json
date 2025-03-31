@@ -9,19 +9,9 @@
       "author": "Phong jack",
       "version": 1,
       "source": "https://aistudio.google.com/",
-      "path": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/gemini-dich/plugin.zip",
-      "icon": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/gemini-dich/icon.png",
+      "path": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/gemini-translate/plugin.zip",
+      "icon": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/gemini-translate/icon.png",
       "description": "Dịch truyện bằng Gemini Translate",
-      "type": "translate"
-    },
-    {
-      "name": "Edge Translate",
-      "author": "Test",
-      "version": 1,
-      "source": "https://www.bing.com/translator",
-      "path": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/edge-translate/plugin.zip",
-      "icon": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/edge-translate/icon.png",
-      "description": "Dịch truyện bằng Edge Translate",
       "type": "translate"
     }
   ]

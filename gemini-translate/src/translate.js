@@ -1,9 +1,45 @@
-async function callGeminiModel(apiKey, inputText) {
-  const modelId = "gemini-2.0-flash";
-  const generateContentApi = "generateContent";
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:${generateContentApi}?key=${apiKey}`;
+load("language_list.js");
 
-  const requestBody = {
+const secret = "mysecret";
+let keyIndex = 0;
+
+function xorDecrypt(encoded, key) {
+  const decoded = Buffer.from(encoded, "base64").toString("binary");
+  let result = "";
+  for (let i = 0; i < decoded.length; i++) {
+    result += String.fromCharCode(
+      decoded.charCodeAt(i) ^ key.charCodeAt(i % key.length)
+    );
+  }
+  return result;
+}
+
+//FREE GEMINI API KEY so i don't upset if they in internet :))
+//Tui không muốn lộ quá thô thôi :)) chứ biết up lên là lộ rồi
+const API_ENCRYPTEDS = [
+  "LDAJBDALJw4vNEAcJCU3NkA3QBI8AxwmWBgiIgsmDDlbTV4jTjws",
+  "LDAJBDALIT9VEhBWLigjQgQYBCNQNx1HARMAFS0ESDxZFBkBVhQG",
+  "LDAJBDALJkU8ODchE0ouRCI1RzcsHSgEWy9DNwwDUQYyPiNRUEUC",
+  "LDAJBDALJjYOGEsJAh0sTVxOMVMLNwk9CCY7LQg4EzkUEgsHEDYw",
+];
+
+function getNextApiKey() {
+  const key = xorDecrypt(API_ENCRYPTEDS[keyIndex]);
+  keyIndex = (keyIndex + 1) % API_ENCRYPTEDS.length;
+  return key;
+}
+
+function execute(text, from, to, apiKey) {
+  return translateContent(text, from, to, 0, keyApi, getNextApiKey());
+}
+
+function translateContent(text, from, to, retryCount, keyApi) {
+  if (retryCount > 2) return null;
+
+  let rawText = text;
+  let modelId = "gemini-2.0-flash";
+  let generateContentApi = "generateContent";
+  let requestBody = {
     contents: [
       {
         role: "user",
@@ -57,7 +93,7 @@ async function callGeminiModel(apiKey, inputText) {
         role: "model",
         parts: [
           {
-            text: 'Tuyệt hảo! Hãy bắt đầu với đoạn văn sau:\n\n"混沌初开，天地玄黄。宇宙洪荒，日月盈昃。\n    彼时，盘古开天，力竭而亡，身化万物。\n    遗留一物，名曰‘玄黄鼎’，镇压天地气运。\n    后世人族得之，方才有了立足之本。\n    而今，玄黄鼎现世，必将引来腥风血雨！"',
+            text: "Tuyệt vời! Tôi đã sẵn sàng để bắt đầu dịch. Hãy cung cấp cho tôi văn bản tiếng Trung mà bạn muốn dịch. Tôi sẽ tuân thủ nghiêm ngặt tất cả các yêu cầu và hướng dẫn mà bạn đã đưa ra để đảm bảo bản dịch đạt chất lượng cao nhất, truyền tải trọn vẹn tinh thần và phong cách của tác phẩm gốc. Tôi sẽ tập trung vào việc giữ nguyên nội dung, phong cách, số lượng từ và dòng, đồng thời sử dụng ngôn ngữ Hán Việt phù hợp, đảm bảo tính mạch lạc và tự nhiên cho độc giả Việt Nam.",
           },
         ],
       },
@@ -65,7 +101,7 @@ async function callGeminiModel(apiKey, inputText) {
         role: "user",
         parts: [
           {
-            text: inputText,
+            text: rawText,
           },
         ],
       },
@@ -77,31 +113,21 @@ async function callGeminiModel(apiKey, inputText) {
     },
   };
 
-  try {
-    const response = await fetch(url, {
+  let response = fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:${generateContentApi}?key=${keyApi}`,
+    {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+  );
 
-    const data = await response.json();
-    const text = data["candidates"][0]["content"]["parts"][0]["text"];
-
-    return text;
-  } catch (error) {
-    console.error("LOG", error);
-    throw error;
+  if (response.ok) {
+    let result = response.json();
+    const translated = result.candidates[0].content.parts[0].text;
+    return Response.success(translated);
   }
-}
-
-async function translate(text) {
-  const apiKey = "REDACTED_GOOGLE_API_KEY";
-  const result = await translate(apiKey, text);
-  console.log(result);
+  return translateContent(text, from, to, retryCount + 1, getNextApiKey());
 }
