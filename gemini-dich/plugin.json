@@ -3,12 +3,11 @@
     "name": "Gemini translate",
     "author": "Phong",
     "version": 1,
-    "source": "https://www.bing.com/translator",
-    "description": "Dịch truyện bằng Edge TTS",
+    "source": "https://aistudio.google.com/",
+    "description": "Dịch truyện bằng Gemini",
     "type": "translate"
   },
   "script": {
-    "language": "language.js",
     "translate": "translate.js"
   },
   "config": {
