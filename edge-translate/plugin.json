@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "Edge Translate",
+    "author": "vBook",
+    "version": 1,
+    "source": "https://www.bing.com/translator",
+    "description": "Dịch truyện bằng Edge TTS",
+    "type": "translate"
+  },
+  "script": {
+    "language": "language.js",
+    "translate": "translate.js"
+  },
+  "config": {
+    "support_auto_detect": true,
+    "max_line": 1000,
+    "max_length": 50000,
+    "required_api_key": false,
+    "support_url": ""
+  }
+}

@@ -13,6 +13,16 @@
       "icon": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/gemini-dich/icon.png",
       "description": "Dịch truyện bằng Gemini Translate",
       "type": "translate"
+    },
+    {
+      "name": "Edge Translate",
+      "author": "Test",
+      "version": 1,
+      "source": "https://www.bing.com/translator",
+      "path": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/edge-translate/plugin.zip",
+      "icon": "https://raw.githubusercontent.com/phong-jack/vbook-ext/main/edge-translate/icon.png",
+      "description": "Dịch truyện bằng Edge Translate",
+      "type": "translate"
     }
   ]
 }

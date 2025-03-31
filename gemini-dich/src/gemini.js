@@ -105,5 +105,3 @@ async function translate(text) {
   const result = await translate(apiKey, text);
   console.log(result);
 }
-
-run();
