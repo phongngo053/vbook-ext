@@ -14,6 +14,17 @@
       "description": "Đọc truyện fanqie novel",
       "type": "chinese_novel",
       "locale": "zh_CN"
+    },
+    {
+      "name": "fanqie-2",
+      "author": "phong-jack",
+      "path": "https://raw.githubusercontent.com/phong-jack/vbook-ext/master/fanqie-2/plugin.zip",
+      "version": 1,
+      "source": "https://fanqienovel.com",
+      "icon": "https://raw.githubusercontent.com/phong-jack/vbook-ext/master/fanqie-2/icon.png",
+      "description": "Đọc truyện fanqie novel",
+      "type": "chinese_novel",
+      "locale": "zh_CN"
     }
   ]
 }
