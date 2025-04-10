@@ -6,3 +6,5 @@ data.json
 history.bak
 .DS_Store
 .env
+/fanqie-host
+/fanqie-2/src/test.js

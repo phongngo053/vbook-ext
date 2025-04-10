@@ -1,7 +1,11 @@
 load("config.js");
 
+// function getUrlChapter(chapterId, code) {
+//   return `https://api.softrr.cn/api/fanqie/?id=${chapterId}&code=${code}`;
+// }
+
 function getUrlChapter(chapterId, code) {
-  return `https://api.softrr.cn/api/fanqie/?id=${chapterId}&code=${code}`;
+  return `http://rehaofan.jingluo.love/content?item_id=${chapterId}`;
 }
 
 function execute(url) {
@@ -33,13 +37,13 @@ function extractChapterContent(htmlString) {
 }
 
 function getVerifyCode() {
-  const VERIFY_URL = "https://api.softrr.cn/api/verification/?id=1";
-  const response = fetch(VERIFY_URL);
-  if (response.ok) {
-    const json = response.json();
-    const code = json.code;
-    return code;
-  } else {
-    return Response.error("Lỗi verify code");
-  }
+  // const VERIFY_URL = "https://api.softrr.cn/api/verification/?id=1";
+  // const response = fetch(VERIFY_URL);
+  // if (response.ok) {
+  //   const json = response.json();
+  //   const code = json.code;
+  //   return code;
+  // } else {
+  //   return Response.error("Lỗi verify code");
+  // }
 }
