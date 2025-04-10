@@ -16,7 +16,7 @@ function execute(url) {
   const response = fetch(url);
   if (response.ok) {
     const json = response.json();
-    const htmlContent = json.data;
+    const htmlContent = json.data.content;
     return Response.success(extractChapterContent(htmlContent));
   } else {
     return Response.error("API bên thứ 3 đã cook :))");
