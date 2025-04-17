@@ -15,9 +15,13 @@ function execute(url) {
 
   const response = fetch(url);
   if (response.ok) {
+    // const json = response.json();
+    // const htmlContent = json.data.content;
+    // return Response.success(extractChapterContent(htmlContent));
+
     const json = response.json();
-    const htmlContent = json.data.content;
-    return Response.success(extractChapterContent(htmlContent));
+    const content = json.data.replace(/<br\s*\/?>|\n/g, "<br><br>");
+    return Response.success(content);
   } else {
     return Response.error("API bên thứ 3 đã cook :))");
   }
