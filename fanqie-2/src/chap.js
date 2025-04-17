@@ -1,12 +1,12 @@
 load("config.js");
 
-// function getUrlChapter(chapterId, code) {
-//   return `https://api.softrr.cn/api/fanqie/?id=${chapterId}&code=${code}`;
-// }
-
 function getUrlChapter(chapterId, code) {
-  return `http://rehaofan.jingluo.love/content?item_id=${chapterId}`;
+  return `https://api.softrr.cn/api/fanqie/?id=${chapterId}&code=${code}`;
 }
+
+// function getUrlChapter(chapterId, code) {
+//   return `http://rehaofan.jingluo.love/content?item_id=${chapterId}`;
+// }
 
 function execute(url) {
   const regex = /(?:item_id=|\/)(\d+)$/;
