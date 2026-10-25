@@ -6,9 +6,12 @@ Tải app tại : [Vbook App Download](https://bit.ly/vbookapp)
 
 ## Link extension
 
-Repo hiện không còn extension nào được phát hành. Danh sách extension (rỗng) vẫn giữ tại:
+Repo phát hành các extension sau:
 
-https://raw.githubusercontent.com/phong-jack/vbook-ext/main/plugin.json
+- **sungthe translate** — dịch truyện bằng API tương thích OpenAI (mặc định DeepSeek),
+  đổi được model và base URL. Dựa trên DeepSeek Translate của Meo.
+
+https://raw.githubusercontent.com/phongngo053/vbook-ext/main/plugin.json
 
 ## Phiên bản beta
 

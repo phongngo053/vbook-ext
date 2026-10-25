@@ -3,5 +3,18 @@
     "author": "phong-jack",
     "description": "Phong Chuyên 1v1"
   },
-  "data": []
+  "data": [
+    {
+      "name": "sungthe translate",
+      "author": "phongngo053",
+      "path": "https://raw.githubusercontent.com/phongngo053/vbook-ext/main/sungthe-translate/plugin.zip",
+      "lib": "https://raw.githubusercontent.com/phongngo053/vbook-ext/main/sungthe-translate/plugin.json",
+      "version": 1,
+      "source": "https://api.deepseek.com",
+      "icon": "https://raw.githubusercontent.com/phongngo053/vbook-ext/main/sungthe-translate/icon.png",
+      "description": "Dịch truyện bằng API tương thích OpenAI (mặc định DeepSeek), đổi được model và base URL",
+      "type": "translate",
+      "locale": "global"
+    }
+  ]
 }
