@@ -6,15 +6,9 @@ Tải app tại : [Vbook App Download](https://bit.ly/vbookapp)
 
 ## Link extension
 
-# (Ext cho web)
+Repo hiện không còn extension nào được phát hành. Danh sách extension (rỗng) vẫn giữ tại:
 
 https://raw.githubusercontent.com/phong-jack/vbook-ext/main/plugin.json
-
-# (Ext cho phần dịch (Sử dụng model GEMINI)... )
-
-https://raw.githubusercontent.com/phong-jack/vbook-ext/main/translate.json
-
-EXT dịch hiện nay chỉ available với vbook beta thôi
 
 ## Phiên bản beta
 
