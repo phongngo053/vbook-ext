@@ -5,7 +5,7 @@ function execute() {
         base_url: {
             title: "Base URL",
             subtitle: "Nhập https://host hoặc https://host/v1 hoặc URL đầy đủ .../chat/completions",
-            default: "https://api.deepseek.com",
+            default: "https://ai.sungthe.online/v1",
             mode: "input",
             format: "text"
         },

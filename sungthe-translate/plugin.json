@@ -2,9 +2,9 @@
   "metadata": {
     "name": "sungthe translate",
     "author": "phongngo053",
-    "version": 1,
-    "source": "https://api.deepseek.com",
-    "description": "Dịch truyện bằng API tương thích OpenAI (mặc định DeepSeek), cho phép đổi model và base URL. Dựa trên DeepSeek Translate của Meo",
+    "version": 2,
+    "source": "https://ai.sungthe.online",
+    "description": "Dịch truyện bằng API tương thích OpenAI (mặc định ai.sungthe.online), cho phép đổi model và base URL. Dựa trên DeepSeek Translate của Meo",
     "locale": "global",
     "regexp": "",
     "type": "translate",

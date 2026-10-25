@@ -599,7 +599,7 @@ function readApiError(response) {
     } catch (e) {
         errorData = null;
     }
-    var message = errorData && errorData.error && errorData.error.message ? String(errorData.error.message) : "";
+    var message = apiErrorMessage(errorData);
     return "API HTTP " + response.status + (message ? ": " + message : "");
 }
 

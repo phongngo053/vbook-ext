@@ -514,7 +514,7 @@ function analysisApiError(response) {
     } catch (e) {
         data = null;
     }
-    var message = data && data.error && data.error.message ? String(data.error.message) : "";
+    var message = apiErrorMessage(data);
     return "API HTTP " + response.status + (message ? ": " + message : "");
 }
 

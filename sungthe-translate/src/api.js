@@ -1,4 +1,4 @@
-var API_DEFAULT_BASE_URL = "https://api.deepseek.com";
+var API_DEFAULT_BASE_URL = "https://ai.sungthe.online/v1";
 var API_DEFAULT_MODEL = "deepseek-chat";
 var API_ENDPOINT_PATH = "/chat/completions";
 var API_CUSTOM_MODEL_ID = "custom";
@@ -53,4 +53,13 @@ function apiPresetModels() {
 function apiJsonMode(model) {
     if (apiReadSetting("use_json_response", "true") !== "true") return false;
     return String(model || "").toLowerCase().indexOf("reasoner") < 0;
+}
+
+// Providers report {"error":{"message":"..."}} or the flat {"error":"..."}.
+function apiErrorMessage(data) {
+    if (!data || !data.error) return "";
+    var nested = data.error.message;
+    if (nested) return String(nested);
+    var flat = String(data.error);
+    return flat.indexOf("[object") === 0 ? "" : flat;
 }
