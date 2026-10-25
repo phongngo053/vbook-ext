@@ -191,15 +191,7 @@ function analysisRequest(apiKeys, chapter, text, blockIndex, blockCount, memoryC
     for (var keyIndex = 0; keyIndex < apiKeys.length; keyIndex++) {
         var response;
         try {
-            response = fetch(endpoint, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + apiKeys[keyIndex]
-                },
-                body: requestBody,
-                timeout: 120000
-            });
+            response = apiPost(endpoint, apiKeys[keyIndex], requestBody, 120000);
         } catch (e) {
             lastError = String(e);
             analysisLog(

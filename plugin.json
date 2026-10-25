@@ -9,10 +9,10 @@
       "author": "phongngo053",
       "path": "https://raw.githubusercontent.com/phongngo053/vbook-ext/main/sungthe-translate/plugin.zip",
       "lib": "https://raw.githubusercontent.com/phongngo053/vbook-ext/main/sungthe-translate/plugin.json",
-      "version": 2,
+      "version": 3,
       "source": "https://ai.sungthe.online",
       "icon": "https://raw.githubusercontent.com/phongngo053/vbook-ext/main/sungthe-translate/icon.png",
-      "description": "Dịch truyện bằng API tương thích OpenAI (mặc định ai.sungthe.online), đổi được model và base URL",
+      "description": "Dịch truyện bằng API tương thích OpenAI (mặc định ai.sungthe.online, model gemma4), đổi được model và base URL",
       "type": "translate",
       "locale": "global"
     }

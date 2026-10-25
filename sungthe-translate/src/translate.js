@@ -64,15 +64,7 @@ function execute(text, from, to, source, model, style) {
     for (var keyIndex = 0; keyIndex < apiKeys.length; keyIndex++) {
         var response;
         try {
-            response = fetch(endpoint, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + apiKeys[keyIndex]
-                },
-                body: requestBody,
-                timeout: 120000
-            });
+            response = apiPost(endpoint, apiKeys[keyIndex], requestBody, 120000);
         } catch (requestError) {
             return Response.error("Không thể kết nối API: " + String(requestError));
         }
@@ -499,15 +491,7 @@ function translateChineseFragmentsOnce(endpoint, apiKey, model, items, memoryPro
     var body = JSON.stringify(request);
 
     try {
-        var response = fetch(endpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + apiKey
-            },
-            body: body,
-            timeout: 30000
-        });
+        var response = apiPost(endpoint, apiKey, body, 30000);
         if (!response.ok) return "";
 
         var data = JSON.parse(response.text());

@@ -12,7 +12,7 @@ function execute() {
         custom_model: {
             title: "Model tùy chỉnh",
             subtitle: "Dùng khi chọn model 'Model tùy chỉnh'; nhập đúng id model của nhà cung cấp",
-            default: "deepseek-chat",
+            default: "gemma4",
             mode: "input",
             format: "text"
         },

@@ -1,5 +1,5 @@
 var API_DEFAULT_BASE_URL = "https://ai.sungthe.online/v1";
-var API_DEFAULT_MODEL = "deepseek-chat";
+var API_DEFAULT_MODEL = "gemma4";
 var API_ENDPOINT_PATH = "/chat/completions";
 var API_CUSTOM_MODEL_ID = "custom";
 
@@ -35,21 +35,15 @@ function apiResolveModel(selected) {
 function apiPresetModels() {
     return [
         {
-            id: "deepseek-chat",
-            name: "DeepSeek Chat",
-            description: "DeepSeek-V3, nhanh và thông minh, tối ưu chi phí",
-            isNetworkRequired: true
-        },
-        {
-            id: "deepseek-reasoner",
-            name: "DeepSeek Reasoner",
-            description: "DeepSeek-R1, chuyên suy luận logic phức tạp",
+            id: "gemma4",
+            name: "Gemma 4",
+            description: "Model mặc định của ai.sungthe.online",
             isNetworkRequired: true
         }
     ];
 }
 
-// DeepSeek reasoner and some OpenAI-compatible hosts reject response_format.
+// Some OpenAI-compatible hosts reject response_format; reasoner models always do.
 function apiJsonMode(model) {
     if (apiReadSetting("use_json_response", "true") !== "true") return false;
     return String(model || "").toLowerCase().indexOf("reasoner") < 0;
@@ -62,4 +56,45 @@ function apiErrorMessage(data) {
     if (nested) return String(nested);
     var flat = String(data.error);
     return flat.indexOf("[object") === 0 ? "" : flat;
+}
+
+// Some OpenAI-compatible backends reject response_format with HTTP 400. Retry once
+// without it so JSON mode stays an optimisation instead of a hard requirement.
+function apiPost(endpoint, apiKey, body, timeoutMs) {
+    var response = fetch(endpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + apiKey
+        },
+        body: body,
+        timeout: timeoutMs
+    });
+    if (!response || response.ok) return response;
+    if (response.status !== 400) return response;
+
+    var errorText = "";
+    try {
+        errorText = String(response.text() || "");
+    } catch (e) {}
+    if (errorText.toLowerCase().indexOf("response_format") < 0) return response;
+
+    var parsed;
+    try {
+        parsed = JSON.parse(body);
+    } catch (e2) {
+        return response;
+    }
+    if (!parsed || !parsed.response_format) return response;
+
+    delete parsed.response_format;
+    return fetch(endpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + apiKey
+        },
+        body: JSON.stringify(parsed),
+        timeout: timeoutMs
+    });
 }
